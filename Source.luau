@@ -433,8 +433,8 @@ function AddParagraph(Parent, Configs)
     Corner(ParagraphFrame, UDim.new(0.3, 0)) 
 
     local ParagraphLabel1 = Create("TextLabel", ParagraphFrame, {
-        Size = UDim2.new(0, 475, 0, 40),
-        Position = UDim2.new(0, 10, 0, 1),
+        Size = UDim2.new(0, 475, 0, 20),
+        Position = UDim2.new(0, 10, 0, 10),
         Text = Name,
         Font = Enum.Font.FredokaOne,
         TextColor3 = Color3.fromRGB(240, 240, 240),
@@ -474,6 +474,7 @@ function AddSlider(Parent, Configs)
     Min, Max = Min / Increase, Max / Increase
 
     local SliderFrame = Create("Frame", Parent, {
+        Name = "Slider",
         Size = UDim2.new(0, 490, 0, 40),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
     })
@@ -576,7 +577,7 @@ function AddToggle(Parent, Configs)
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         BackgroundTransparency = 0
     })
-    Corner(ToggleFrame1)
+    Corner(ToggleFrame1, UDim.new(0.3, 0))
 
     local ToggleFrame2 = Create("Frame", ToggleFrame1, {
         Size = UDim2.new(0, 70, 0, 30),
@@ -682,7 +683,7 @@ function AddTextBox(Parent, Configs)
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         BackgroundTransparency = 0
     })
-    Corner(TextBoxFrame)
+    Corner(TextBoxFrame, UDim.new(0.3, 0))
      
      local TextBoxText = Create("TextLabel", TextBoxFrame, {
         Text = Name,
