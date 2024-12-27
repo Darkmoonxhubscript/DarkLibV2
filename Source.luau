@@ -584,7 +584,7 @@ function AddToggle(Parent, Configs)
         BackgroundColor3 = Color3.fromRGB(70, 70, 70),
         BackgroundTransparency = 1
     })
-    local Stroke1 = Stroke(ToggleFrame2, Color3.fromRGB(100, 100, 100), 2)
+    local Stroke1 = Stroke(ToggleFrame2, Color3.fromRGB(100, 100, 100), 3)
     Corner(ToggleFrame2, UDim.new(2, 0))
 
     local ToggleActive = Create("Frame", ToggleFrame1, {
@@ -593,7 +593,7 @@ function AddToggle(Parent, Configs)
         BackgroundColor3 = Color3.fromRGB(160, 160, 160),
         BackgroundTransparency = 0
     })
-    local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2)
+    local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2.5)
     Corner(ToggleActive, UDim.new(5, 0))
 
     local ToggleState = false
