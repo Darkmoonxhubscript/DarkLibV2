@@ -225,9 +225,9 @@ function NewTab(Configs)
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundColor3 = Color3.fromRGB(0, 165, 255),
         Size = UDim2.new(0, 10, 0, 30),
-        BackgroundTransparency = 1 -- Inicialmente invisível
+        BackgroundTransparency = 1
     })
-    Corner(BagulhoAzul)
+    Corner(BagulhoAzul, UDim.new(0.3, 0))  
     
     local TabNameLabel = Create("TextLabel", TabButton,{
         Text = TabName,
