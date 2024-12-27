@@ -724,6 +724,194 @@ function AddTextBox(Parent, Configs)
      return TextBoxFrame
   end
 
+function AddDropDown(Parent, Configs)
+    local Name = Configs[1] or Configs.Name or Configs.Text or "Dropdown"
+    local Options = Configs[2] or Configs.Options or {"1", "2"}
+    local Default = Configs[3] or Configs.Default or "1"
+    local Callback = Configs[4] or Configs.Callback or function() end
+   
+    local DropdownFrame = Create("Frame", Parent, {
+        Name = "Dropdown",
+        Size = UDim2.new(0, 490, 0, 40),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 0
+    })
+  Stroke(DropdownFrame, Color3.fromRGB(120, 120, 120), 1)
+    Corner(DropdownFrame)
+    
+    local DropButton = Create("TextButton", DropdownFrame, {
+        Size = UDim2.new(0, 30, 0, 30),
+        Position = UDim2.new(1, -30, 0, 5),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 1,
+        Text = ""
+    })
+    
+    local DropDownText1 = Create("TextLabel", DropdownFrame, {
+        Size = UDim2.new(0, 200, 0, 40),
+        Position = UDim2.new(0, 10, 0, 0),
+        Text = Name,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextWrapped = false,
+        TextTruncate = "AtEnd",
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+  
+  local DropDownText2Frame = Create("Frame", DropdownFrame, {
+        Size = UDim2.new(0, 200, 0, 30),
+        Position = UDim2.new(0, 246, 0, 5),
+        BackgroundColor3 = Color3.fromRGB(80, 80, 80),
+        BackgroundTransparency = 0
+    })Corner(DropDownText2Frame)
+  
+    local DropDownText2 = Create("TextLabel", DropdownFrame, {
+        Size = UDim2.new(0, 200, 0, 30),
+        Position = UDim2.new(0, 247, 0, 5),
+        Text = Default,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(200, 200, 200),
+        TextSize = 15,
+        BackgroundTransparency = 1,
+        TextScaled = true,
+        TextDirection = "RightToLeft",
+        TextXAlignment = Enum.TextXAlignment.Center,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+    
+    local Bagulho1 = Create("Frame", DropdownFrame, {
+    Size = UDim2.new(1, 0, 0, 0),
+    Position = UDim2.new(0, 0, 0, 37),
+    Visible = false
+  })Stroke(Bagulho1, Color3.fromRGB(120, 120, 120), 1)
+  
+  local ListDrop = Create("ScrollingFrame", DropdownFrame, {
+    Size = UDim2.new(1, -4, 1, -35),
+    Position = UDim2.new(0, 2, 1, 0),
+    AnchorPoint = Vector2.new(0, 1),
+    Visible = false,
+    BackgroundTransparency = 1,
+    BackgroundColor3 = Color3.fromRGB(100, 100, 100),
+    ScrollingDirection = "Y",
+    ElasticBehavior = "Never",
+    ScrollBarThickness = 0,
+    AutomaticCanvasSize = "Y",
+    CanvasSize = UDim2.new(0, 0, 0, 0)
+  })
+    
+   local Setinha = Create("ImageLabel", DropdownFrame, {
+     Image = "rbxassetid://6031090990",
+     Size = UDim2.new(0, 30, 0, 30),
+     Position = UDim2.new(1, -30, 0, 5),
+     BackgroundTransparency = 1
+   })
+ 
+ local Padding = Create("UIPadding", ListDrop, {
+    PaddingLeft = UDim.new(0, 10),
+    PaddingRight = UDim.new(0, 10),
+    PaddingTop = UDim.new(0, 5),
+    PaddingBottom = UDim.new(0, 5)
+  })
+ 
+ local ListLayout = Create("UIListLayout", ListDrop, {
+    Padding = UDim.new(0, 5)
+  })
+ 
+   local function AddOption(Name)
+    local NewOption = Create("TextButton", ListDrop, {
+      Name = "Option",
+      Size = UDim2.new(1, 0, 0, 20),
+      Text = "",
+      TextSize = 15,
+      Font = Enum.Font.FredokaOne,
+      TextColor3 = Color3.fromRGB(240, 240, 240),
+      BackgroundTransparency = 0.5,
+      TextXAlignment = "Left",
+      BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    })Corner(NewOption)
+    
+    local TextLabel = Create("TextLabel", NewOption, {
+      Name = "OptionTextLabel",
+      Size = UDim2.new(0, 15, 0, 30),
+      Position = UDim2.new(0, 12, 0, 0),
+      Text = Name,
+      TextSize = 15,
+      Font = Enum.Font.FredokaOne,
+      TextColor3 = Color3.fromRGB(240, 240, 240),
+      BackgroundTransparency = 1,
+      TextXAlignment = "Left",
+      TextWrapped = false
+    })
+    
+    local BagulhoAzul = Create("Frame", NewOption, {
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(0, 165, 255),
+        Size = UDim2.new(0, 10, 0, 20),
+        BackgroundTransparency = 1
+    })Corner(BagulhoAzul)
+    
+    if TextLabel.Text == Default then
+      NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
+      NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
+      Callback(Default)
+      TextLabel.Text = Default
+    end
+    
+    NewOption.MouseButton1Click:Connect(function()
+      for _,v in pairs(ListDrop:GetChildren()) do
+        if v.Name == "Option" then
+        local tween1 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
+        tween1:Play()
+          v.TextColor3 = Color3.fromRGB(240, 240, 240)
+          v.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+        end
+      end
+      local tween2 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
+        tween2:Play()
+      Callback(TextLabel.Text)
+      NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
+      NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
+      DropDownText2.Text = TextLabel.Text
+    end)
+    ListDrop.CanvasSize = ListDrop.CanvasSize + UDim2.new(0, 0, 0, 25)
+     end
+ 
+   for i = 1, #Options do
+     AddOption(Options[i])
+     end
+    
+    local DropdownOn = false
+   DropButton.MouseButton1Click:Connect(function()
+     local frameSize = UDim2.new(0, 490, 0, 100)
+    for i,v in pairs(ListDrop:GetChildren()) do
+      if v.Name == "Option" and i <= 7 then
+        FrameSizeNew = frameSize + UDim2.new(0, 0, 0, 25)
+      end
+    end
+    if DropdownOn == false then
+      DropdownOn = true
+      Bagulho1.Visible = DropdownOn
+      ListDrop.Visible = DropdownOn
+      local tween1 = TweenService:Create(DropdownFrame, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = FrameSizeNew})
+      local tween2 = TweenService:Create(Setinha, TweenInfo.new(0.2), {Rotation = 180})
+      tween1:Play()tween2:Play()
+    else
+      DropdownOn = false
+      local tween1 = TweenService:Create(DropdownFrame, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 490, 0, 40)})
+      local tween2 = TweenService:Create(Setinha, TweenInfo.new(0.2), {Rotation = 0})
+      tween1:Play()tween2:Play()tween1.Completed:Wait()
+      Bagulho1.Visible = DropdownOn
+      ListDrop.Visible = DropdownOn
+    end
+  end)
+  ListDrop.CanvasSize = ListDrop.CanvasSize + UDim2.new(0, 0, 0, 10)
+    return ListDrop
+end
+
 
 end
 
