@@ -221,6 +221,13 @@ function NewTab(Configs)
     })
     Corner(TabButton, UDim.new(0.3, 0))  
     
+    local BagulhoAzul = Create("Frame", TabButton, {
+    Position = UDim2.new(0, 0, 0, 0),
+    BackgroundColor3 = Color3.fromRGB(0, 165, 255),
+    Size = UDim2.new(0, 10, 0, 20),
+    BackgroundTransparency = 0
+    })Corner(BagulhoAzul)
+    
     local TabNameLabel = Create("TextLabel", TabButton,{
       Text = TabName,
       BackgroundTransparency = 1,
@@ -263,16 +270,22 @@ function NewTab(Configs)
     
     if SelectedTab == TabName then
         TabFrame.Visible = true
+        local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.3, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
+        tween:Play()
         TabButton.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
     end
 
     TabButton.MouseButton1Click:Connect(function()
         for _, button in pairs(LeftScrollFrame:GetChildren()) do
             if button:IsA("TextButton") then
+                local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.1, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
+                tween:Play()
                 button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
             end
         end
         
+        local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.3, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
+        tween:Play()
         TabButton.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
         for _, frame in pairs(Tabs) do
             frame.Visible = false
@@ -310,7 +323,7 @@ function AddButton(Parent, Configs)
       TextColor3 = Color3.fromRGB(240, 240, 240),
       Font = Enum.Font.FredokaOne,
       TextSize = 20,
-      Size = UDim2.new(0, 200, 0, 40),
+      Size = UDim2.new(0, 450, 0, 40),
       TextWrapped = false,
       BackgroundTransparency = 1,
       Position = UDim2.new(0, 10, 0, 0),
@@ -320,20 +333,20 @@ function AddButton(Parent, Configs)
 
     local Image = Create("ImageLabel", Button, {
         Image = "rbxassetid://10709791437",
-        Size = UDim2.new(0, 30, 0, 30),
-        Position = UDim2.new(1, -40, 0, 6),
+        Size = UDim2.new(0, 25, 0, 30),
+        Position = UDim2.new(1, -30, 0, 5),
         BackgroundTransparency = 1
     })
 
     Button.MouseButton1Click:Connect(function()
       Callback()
-  local tween1 = TweenService:Create(TextLabel, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {TextColor3 = Color3.fromRGB(0, 115, 255)})
-  local tween2 = TweenService:Create(Image, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {ImageColor3 = Color3.fromRGB(0, 115, 255)})
+  local tween1 = TweenService:Create(TextLabel, TweenInfo.new(0.3, Enum.EasingStyle.Linear), {TextColor3 = Color3.fromRGB(0, 220, 255)})
+  local tween2 = TweenService:Create(Image, TweenInfo.new(0.3, Enum.EasingStyle.Linear), {ImageColor3 = Color3.fromRGB(0, 220, 255)})
   tween1:Play()
   tween2:Play()
   tween1.Completed:Wait()
-  local tween3 = TweenService:Create(TextLabel, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {TextColor3 = Color3.fromRGB(240, 240, 240)})
-  local tween4 = TweenService:Create(Image, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {ImageColor3 = Color3.fromRGB(255, 255, 255)})
+  local tween3 = TweenService:Create(TextLabel, TweenInfo.new(0.3, Enum.EasingStyle.Linear), {TextColor3 = Color3.fromRGB(240, 240, 240)})
+  local tween4 = TweenService:Create(Image, TweenInfo.new(0.3, Enum.EasingStyle.Linear), {ImageColor3 = Color3.fromRGB(255, 255, 255)})
   tween3:Play()
   tween4:Play()
     end)
