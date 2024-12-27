@@ -572,6 +572,7 @@ function AddToggle(Parent, Configs)
     local Callback = Configs.Callback or function() end
 
     local ToggleFrame1 = Create("Frame", Parent, {
+        Name = "Toggle",
         Size = UDim2.new(0, 490, 0, 40),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
@@ -678,6 +679,7 @@ function AddTextBox(Parent, Configs)
   local Callback = Configs[5] or Configs.Callback or function() end
   
   local TextBoxFrame = Create("Frame", Parent, {
+        Name = "TextBox",
         Size = UDim2.new(0, 490, 0, 40),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
@@ -737,8 +739,7 @@ function AddDropDown(Parent, Configs)
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         BackgroundTransparency = 0
     })
-  Stroke(DropdownFrame, Color3.fromRGB(120, 120, 120), 1)
-    Corner(DropdownFrame)
+    Corner(DropdownFrame, UDim.new(0.3, 0))
     
     local DropButton = Create("TextButton", DropdownFrame, {
         Size = UDim2.new(0, 30, 0, 30),
@@ -805,8 +806,8 @@ function AddDropDown(Parent, Configs)
     
    local Setinha = Create("ImageLabel", DropdownFrame, {
      Image = "rbxassetid://6031090990",
-     Size = UDim2.new(0, 30, 0, 30),
-     Position = UDim2.new(1, -30, 0, 5),
+     Size = UDim2.new(0, 40, 0, 30),
+     Position = UDim2.new(1, -40, 0, 5),
      BackgroundTransparency = 1
    })
  
@@ -814,7 +815,7 @@ function AddDropDown(Parent, Configs)
     PaddingLeft = UDim.new(0, 10),
     PaddingRight = UDim.new(0, 10),
     PaddingTop = UDim.new(0, 5),
-    PaddingBottom = UDim.new(0, 5)
+    PaddingBottom = UDim.new(0, 0)
   })
  
  local ListLayout = Create("UIListLayout", ListDrop, {
@@ -836,7 +837,7 @@ function AddDropDown(Parent, Configs)
     
     local TextLabel = Create("TextLabel", NewOption, {
       Name = "OptionTextLabel",
-      Size = UDim2.new(0, 15, 0, 30),
+      Size = UDim2.new(0, 450, 0, 20),
       Position = UDim2.new(0, 12, 0, 0),
       Text = Name,
       TextSize = 15,
@@ -864,7 +865,7 @@ function AddDropDown(Parent, Configs)
     NewOption.MouseButton1Click:Connect(function()
       for _,v in pairs(ListDrop:GetChildren()) do
         if v.Name == "Option" then
-        local tween1 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
+        local tween1 = TweenService:Create(v.BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
         tween1:Play()
           v.TextColor3 = Color3.fromRGB(240, 240, 240)
           v.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
