@@ -303,7 +303,7 @@ function AddButton(Parent, Configs)
         TextXAlignment = Enum.TextXAlignment.Left,
         TextYAlignment = Enum.TextYAlignment.Center
     })
-    Corner(Button, UDim.new(0.1, 0)) 
+    Corner(Button, UDim.new(0.3, 0)) 
 
     local TextLabel = Create("TextLabel", Button, {
       Text = Name,
@@ -319,9 +319,9 @@ function AddButton(Parent, Configs)
     })
 
     local Image = Create("ImageLabel", Button, {
-        Image = "rbxassetid://12804017070",
+        Image = "rbxassetid://10709791437",
         Size = UDim2.new(0, 30, 0, 30),
-        Position = UDim2.new(1, -40, 0, 5),
+        Position = UDim2.new(1, -40, 0, 6),
         BackgroundTransparency = 1
     })
 
@@ -333,7 +333,7 @@ function AddButton(Parent, Configs)
   tween2:Play()
   tween1.Completed:Wait()
   local tween3 = TweenService:Create(TextLabel, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {TextColor3 = Color3.fromRGB(240, 240, 240)})
-  local tween4 = TweenService:Create(Image, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {ImageColor3 = Color3.fromRGB(0, 115, 255)})
+  local tween4 = TweenService:Create(Image, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {ImageColor3 = Color3.fromRGB(255, 255, 255)})
   tween3:Play()
   tween4:Play()
     end)
