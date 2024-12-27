@@ -636,22 +636,28 @@ function AddToggle(Parent, Configs)
     ToggleButtonArea.MouseButton1Click:Connect(function()
         if ToggleState then
           SetProps(Stroke1, {
-        Color = Color3.fromRGB(0, 185, 255)
+        Color = Color3.fromRGB(70, 70, 70)
       })
     SetProps(Stroke2, {
-        Color = Color3.fromRGB(0, 185, 255)
+        Color = Color3.fromRGB(160, 160, 160)
       })
+    SetProps(ToggleActive, {
+      BackgroundColor3 = Color3.fromRGB(160, 160, 160),
+    })
           local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(0, 413, 0, 8)})
           tween:Play()
           tween.Completed:Wait()
             ToggleState = false
         elseif not ToggleState then
           SetProps(Stroke1, {
-        Color = Color3.fromRGB(70, 70, 70)
+        Color = Color3.fromRGB(0, 185, 255)
       })
     SetProps(Stroke2, {
-        Color = Color3.fromRGB(160, 160, 160)
+        Color = Color3.fromRGB(0, 185, 255)
       })
+    SetProps(ToggleActive, {
+      BackgroundColor3 = Color3.fromRGB(0, 185, 255),
+    })
           local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -37, 0, 8)})
           tween:Play()
           tween.Completed:Wait()
