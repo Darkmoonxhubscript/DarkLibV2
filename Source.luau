@@ -99,7 +99,7 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 
 local MainFrame = Create("Frame", ScreenGui, {
     Name = "MainFrame",
-    BackgroundColor3 = Color3.fromRGB(10, 10, 10),
+    BackgroundColor3 = Color3.fromRGB(28, 28, 28),
     Size = UDim2.new(0.5, 0, 0.6, 0),
     Position = UDim2.new(0.5, 0, 0.5, 0),
     AnchorPoint = Vector2.new(0.5, 0.5),
@@ -111,7 +111,7 @@ MakeDrag(MainFrame)
 
 local TopBar = Create("Frame", MainFrame, {
     Name = "TopBar",
-    BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+    BackgroundColor3 = Color3.fromRGB(35, 35, 35),
     Size = UDim2.new(1, 0, 0.1, 0),
     Position = UDim2.new(0, 0, 0, 0)
 })
@@ -149,7 +149,7 @@ end)
 
 local LeftBar = Create("Frame", MainFrame, {
     Name = "TabsBar",
-    BackgroundColor3 = Color3.fromRGB(25, 25, 25),
+    BackgroundColor3 = Color3.fromRGB(30, 30, 30),
     Size = UDim2.new(0.2, 0, 0.9, 0),
     Position = UDim2.new(0, 0, 0.1, 0)
 })
@@ -157,7 +157,7 @@ Corner(LeftBar, UDim.new(0.05, 0))
 
 local LeftScrollFrame = Create("ScrollingFrame", LeftBar, {
     Name = "TabsScrollFrame",
-    BackgroundColor3 = Color3.fromRGB(35, 35, 35),
+    BackgroundColor3 = Color3.fromRGB(30, 30, 30),
     BorderSizePixel = 0,
     Size = UDim2.new(1, 0, 1, 0),
     ScrollBarThickness = 0,
@@ -171,7 +171,7 @@ Create("UIListLayout", LeftScrollFrame, {
 
 local RightScrollFrame = Create("Frame", MainFrame, {
     Name = "Containers",
-    BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+    BackgroundColor3 = Color3.fromRGB(28, 28, 28),
     BorderSizePixel = 0,
     Size = UDim2.new(0.8, 0, 0.9, 0),
     Position = UDim2.new(0.2, 0, 0.1, 0)
