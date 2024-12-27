@@ -97,6 +97,96 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
     Scale = UIScale
 })
 
+local NotifyMenu = Create("Frame", ScreenGui, {
+    Size = UDim2.new(0, 300, 1, 0),
+    Position = UDim2.new(1, 0, 0, 0),
+    AnchorPoint = Vector2.new(1, 0),
+    BackgroundTransparency = 1
+})
+
+Create("UIPadding", NotifyMenu, {
+    PaddingLeft = UDim.new(0, 25),
+    PaddingTop = UDim.new(0, 25),
+    PaddingBottom = UDim.new(0, 50)
+})
+
+Create("UIListLayout", NotifyMenu, {
+    Padding = UDim.new(0, 15),
+    VerticalAlignment = Enum.VerticalAlignment.Bottom
+})
+
+function NewNotify(Configs)
+    local Title = Configs.Title or Configs.Name or Configs.Text or "Notification"
+    local Description = Configs.Description or "Description"
+    local Time = Configs.Time or 5
+
+    local Frame1 = Create("Frame", NotifyMenu, {
+        Size = UDim2.new(1, 0, 0, 75),
+        BackgroundTransparency = 1
+    })
+
+    local Frame2 = Create("Frame", Frame1, {
+        Size = UDim2.new(1, -50, 0, 75),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        AutomaticSize = Enum.AutomaticSize.Y
+    })
+    Stroke(Frame2, Color3.fromRGB(200, 200, 200), 1)
+    Corner(Frame2, UDim.new(0, 15))
+
+    Create("TextLabel", Frame2, {
+        Size = UDim2.new(1, -30, 0, 25),
+        Font = Enum.Font.FredokaOne,
+        BackgroundTransparency = 1,
+        Text = Title,
+        TextSize = 20,
+        Position = UDim2.new(0, 10, 0, 5),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextColor3 = Color3.fromRGB(255, 255, 255)
+    })
+
+    local CloseButton = Create("TextButton", Frame2, {
+        Text = "X",
+        Font = Enum.Font.FredokaOne,
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(200, 200, 200),
+        Position = UDim2.new(1, -5, 0, 5),
+        AnchorPoint = Vector2.new(1, 0),
+        Size = UDim2.new(0, 25, 0, 25)
+    })
+
+    CloseButton.MouseButton1Click:Connect(function()
+        Frame1:Destroy()
+    end)
+
+    Create("TextLabel", Frame2, {
+        Size = UDim2.new(1, -30, 0, 0),
+        Position = UDim2.new(0, 10, 0, 35),
+        TextSize = 15,
+        TextColor3 = Color3.fromRGB(200, 200, 200),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Text = Description,
+        Font = Enum.Font.FredokaOne,
+        BackgroundTransparency = 1,
+        AutomaticSize = Enum.AutomaticSize.Y,
+        TextWrapped = true
+    })
+
+    local Separator = Create("Frame", Frame2, {
+        Size = UDim2.new(1, -4, 0, 2),
+        BackgroundColor3 = Color3.fromRGB(55, 55, 55),
+        Position = UDim2.new(0, 2, 1, -4)
+    })
+    Stroke(Separator, Color3.fromRGB(255, 255, 255), 0.1)
+    
+    Corner(Frame2, UDim.new(0, 0))
+task.spawn(function()
+    task.wait(Time)
+    Frame1:Destroy()
+    end)
+end
+
+
 local MainFrame = Create("Frame", ScreenGui, {
     Name = "MainFrame",
     BackgroundColor3 = Color3.fromRGB(28, 28, 28),
