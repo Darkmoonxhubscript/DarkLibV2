@@ -565,6 +565,159 @@ function AddSlider(Parent, Configs)
     UpdateSliderValue((Default - Min) / (Max - Min))
 end
 
+function AddToggle(Parent, Configs)
+    local Name = Configs[1] or Configs.Name or Configs.Text or "Toggle"
+    local Default = Configs[2] or Configs.Default or false
+    local Callback = Configs.Callback or function() end
+
+    local ToggleFrame1 = Create("Frame", Parent, {
+        Size = UDim2.new(0, 490, 0, 40),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 0
+    })
+    Corner(ToggleFrame1)
+
+    local ToggleFrame2 = Create("Frame", ToggleFrame1, {
+        Size = UDim2.new(0, 70, 0, 30),
+        Position = UDim2.new(1, -80, 0, 5),
+        BackgroundColor3 = Color3.fromRGB(70, 70, 70),
+        BackgroundTransparency = 1
+    })
+    local Stroke2 = Stroke(ToggleFrame2, Color3.fromRGB(100, 100, 100), 2)
+    Corner(ToggleFrame2, UDim.new(2, 0))
+
+    local ToggleActive = Create("Frame", ToggleFrame1, {
+        Size = UDim2.new(0, 25, 0, 25),
+        Position = UDim2.new(0, 413, 0, 8),
+        BackgroundColor3 = Color3.fromRGB(160, 160, 160),
+        BackgroundTransparency = 0
+    })
+    local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2)
+    Corner(ToggleActive, UDim.new(5, 0))
+
+    local ToggleState = false
+    if Default then
+      SetProps(Stroke1, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+    SetProps(Stroke2, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+      local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -37, 0, 8)})
+          tween:Play()
+          tween.Completed:Wait()
+        ToggleState = true
+    end
+
+    Callback(ToggleState)
+
+    local TextToggle = Create("TextLabel", ToggleFrame1, {
+        Text = Name,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        Font = Enum.Font.FredokaOne,
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        Size = UDim2.new(0, 200, 0, 40),
+        Position = UDim2.new(0, 10, 0, 0),
+        BorderSizePixel = 0,
+        ClipsDescendants = true,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+
+    local ToggleButtonArea = Create("TextButton", ToggleFrame1, {
+        Text = "",
+        Size = UDim2.new(0, 70, 0, 30),
+        Position = UDim2.new(1, -80, 0, 5),
+        BackgroundTransparency = 1
+    })
+
+    ToggleButtonArea.MouseButton1Click:Connect(function()
+        if ToggleState then
+          SetProps(Stroke1, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+    SetProps(Stroke2, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+          local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(0, 413, 0, 8)})
+          tween:Play()
+          tween.Completed:Wait()
+            ToggleState = false
+        elseif not ToggleState then
+          SetProps(Stroke1, {
+        Color = Color3.fromRGB(70, 70, 70)
+      })
+    SetProps(Stroke2, {
+        Color = Color3.fromRGB(160, 160, 160)
+      })
+          local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -37, 0, 8)})
+          tween:Play()
+          tween.Completed:Wait()
+            ToggleState = true
+        end
+        Callback(ToggleState)
+    end)
+
+    return {ToggleActive, Callback, ToggleState}
+end
+
+function AddTextBox(Parent, Configs)
+  local Name = Configs[1] or Configs.Name or Configs.Text or "TextBox"
+  local Default = Configs[2] or Configs.Default or ""
+  local AutoClear = Configs[3] or Configs.AutoClear or false
+  local PlaceHolder = Configs[4] or Configs.PlaceHolder or "Input Here"
+  local Callback = Configs[5] or Configs.Callback or function() end
+  
+  local TextBoxFrame = Create("Frame", Parent, {
+        Size = UDim2.new(0, 490, 0, 40),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 0
+    })
+    Corner(TextBoxFrame)
+     
+     local TextBoxText = Create("TextLabel", TextBoxFrame, {
+        Text = Name,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        Font = Enum.Font.FredokaOne,
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        Size = UDim2.new(0, 200, 0, 40),
+        Position = UDim2.new(0, 10, 0, 0),
+        BorderSizePixel = 0,
+        ClipsDescendants = true,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+  
+  local TextBox = Create("TextBox", TextBoxFrame, {
+    Size = UDim2.new(0, 80, 1, -10),
+    Position = UDim2.new(1, -90, 0, 5),
+    ClearTextOnFocus = false,
+    BackgroundColor3 = Color3.fromRGB(80, 80, 80),
+    BackgroundTransparency = 0,
+    Text = Default,
+    TextColor3 = Color3.fromRGB(240, 240, 240),
+    Font = Enum.Font.FredokaOne,
+    PlaceholderText = PlaceHolder,
+    TextScaled = true
+  })
+  Stroke(TextBox, Color3.fromRGB(60, 60, 60), 2)
+  Corner(TextBox)
+  
+  Callback(Default)
+  TextBox.FocusLost:Connect(function()
+    Callback(TextBox.Text)
+    if AutoClear == true then
+    TextBox.Text = ""
+    end
+  end)
+     return TextBoxFrame
+  end
+
+
 end
 
 return DarkLib
