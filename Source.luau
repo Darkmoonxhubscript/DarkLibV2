@@ -474,15 +474,15 @@ function AddSlider(Parent, Configs)
     Min, Max = Min / Increase, Max / Increase
 
     local SliderFrame = Create("Frame", Parent, {
-        Size = UDim2.new(0, 490, 0, 70),
+        Size = UDim2.new(0, 490, 0, 40),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
     })
     Corner(SliderFrame, UDim.new(0.3, 0)) 
 
     local SliderLabel = Create("TextLabel", SliderFrame, {
         Text = Name,
-        Size = UDim2.new(1, -60, 0, 25),
-        Position = UDim2.new(0, 10, 0, 5),
+        Size = UDim2.new(1, -300, 0, 25),
+        Position = UDim2.new(0, 10, 0, 6),
         Font = Enum.Font.FredokaOne,
         TextColor3 = Color3.fromRGB(240, 240, 240),
         BackgroundTransparency = 1,
@@ -492,19 +492,20 @@ function AddSlider(Parent, Configs)
   
   local SliderValueLabel = Create("TextLabel", SliderFrame, {
         Text = Name,
-        Size = UDim2.new(1, -60, 0, 25),
-        Position = UDim2.new(0, 10, 0, 5),
+        Size = UDim2.new(1, -400, 0, 25),
+        Position = UDim2.new(0, 198, 0, 6),
         Font = Enum.Font.FredokaOne,
         TextColor3 = Color3.fromRGB(240, 240, 240),
         BackgroundTransparency = 1,
         TextSize = 20,
         TextTruncate = "AtEnd",
-        TextXAlignment = Enum.TextXAlignment.Left,
+        TextDirection = "RightToLeft",
+        TextXAlignment = Enum.TextXAlignment.Right
     })
 
     local SliderBarBackground = Create("Frame", SliderFrame, {
-        Size = UDim2.new(1, -20, 0, 8),
-        Position = UDim2.new(0, 20, 0, 50),
+        Size = UDim2.new(1, -300, 0, 8),
+        Position = UDim2.new(0, 290, 0, 16),
         BackgroundColor3 = Color3.fromRGB(120, 120, 120),
     })
     Corner(SliderBarBackground)
