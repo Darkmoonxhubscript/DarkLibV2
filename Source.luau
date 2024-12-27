@@ -285,5 +285,62 @@ function NewTab(Configs)
     return TabFrame
 end
 
+function AddButton(Parent, Configs)
+    local Name = Configs[1] or Configs.Name or Configs.Text or "Button"
+    local Callback = Configs.Callback or function() print("Clicked") end
+    
+    local Button = Create("TextButton", Parent, {
+        Text = "",
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        Font = Enum.Font.FredokaOne,
+        TextSize = 20,
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        Size = UDim2.new(0, 490, 0, 40),
+        TextWrapped = false,
+        Position = UDim2.new(0, 10, 0, 0),
+        BorderSizePixel = 0,
+        ClipsDescendants = true,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+    Corner(Button, UDim.new(0.1, 0)) 
+
+    local TextLabel = Create("TextLabel", Button, {
+      Text = Name,
+      TextColor3 = Color3.fromRGB(240, 240, 240),
+      Font = Enum.Font.FredokaOne,
+      TextSize = 20,
+      Size = UDim2.new(0, 200, 0, 40),
+      TextWrapped = false,
+      BackgroundTransparency = 1,
+      Position = UDim2.new(0, 10, 0, 0),
+      TextXAlignment = Enum.TextXAlignment.Left,
+      TextYAlignment = Enum.TextYAlignment.Center
+    })
+
+    local Image = Create("ImageLabel", Button, {
+        Image = "rbxassetid://12804017070",
+        Size = UDim2.new(0, 30, 0, 30),
+        Position = UDim2.new(1, -40, 0, 5),
+        BackgroundTransparency = 1
+    })
+
+    Button.MouseButton1Click:Connect(function()
+      Callback()
+  local tween1 = TweenService:Create(TextLabel, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {TextColor3 = Color3.fromRGB(0, 115, 255)})
+  local tween2 = TweenService:Create(Image, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {ImageColor3 = Color3.fromRGB(0, 115, 255)})
+  tween1:Play()
+  tween2:Play()
+  tween1.Completed:Wait()
+  local tween3 = TweenService:Create(TextLabel, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {TextColor3 = Color3.fromRGB(240, 240, 240)})
+  local tween4 = TweenService:Create(Image, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {ImageColor3 = Color3.fromRGB(0, 115, 255)})
+  tween3:Play()
+  tween4:Play()
+    end)
+
+    return Button
 end
-return DarkMoonLibrary
+
+end
+
+return DarkLib
