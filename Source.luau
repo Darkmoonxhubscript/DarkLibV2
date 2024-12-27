@@ -947,7 +947,7 @@ function AddDropDown(Parent, Configs)
     })Corner(BagulhoAzul)
     
     if TextLabel.Text == Default then
-      local tween1 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
+      local tween1 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
         tween1:Play()
       NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
       NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
