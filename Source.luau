@@ -150,7 +150,7 @@ end)
 local LeftBar = Create("Frame", MainFrame, {
     Name = "TabsBar",
     BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-    Size = UDim2.new(0.2, 0, 0.9, 0),
+    Size = UDim2.new(0, 150, 0.9, 0),
     Position = UDim2.new(0, 0, 0.1, 0)
 })
 Corner(LeftBar, UDim.new(0.05, 0))
@@ -173,8 +173,8 @@ local RightScrollFrame = Create("Frame", MainFrame, {
     Name = "Containers",
     BackgroundColor3 = Color3.fromRGB(28, 28, 28),
     BorderSizePixel = 0,
-    Size = UDim2.new(0.8, 0, 0.9, 0),
-    Position = UDim2.new(0.2, 0, 0.1, 0)
+    Size = UDim2.new(0, 497, 0.9, 0),
+    Position = UDim2.new(0.2, 20, 0.1, 0)
 })
 Corner(RightScrollFrame)
 
@@ -230,7 +230,7 @@ function NewTab(Configs)
       TextDirection = "LeftToRight",
       TextXAlignment = Enum.TextXAlignment.Left,
       TextYAlignment = Enum.TextYAlignment.Center,
-      Size = UDim2.new(0, 100, 0, 20),
+      Size = UDim2.new(0, 122, 0, 20),
       Position = UDim2.new(0, 25, 0, 5)
     })
   
