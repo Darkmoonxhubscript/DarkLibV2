@@ -309,6 +309,7 @@ function AddButton(Parent, Configs)
     local Callback = Configs.Callback or function() print("Clicked") end
     
     local Button = Create("TextButton", Parent, {
+        Name = "Button",
         Text = "",
         TextColor3 = Color3.fromRGB(240, 240, 240),
         Font = Enum.Font.FredokaOne,
@@ -364,12 +365,13 @@ function AddSection(Parent, Configs)
     local Name = Configs[1] or Configs.Name or Configs.Text or "Section"
     
     local SectionFrame = Create("Frame", Parent, {
+        Name = "Section",
         Size = UDim2.new(0, 490, 0, 40),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         BackgroundTransparency = 0
     })
-    Corner(SectionFrame)
+    Corner(SectionFrame, UDim.new(0.3, 0)) 
 
     local SectionLabel = Create("TextLabel", SectionFrame, {
         Size = UDim2.new(0, 490, 0, 40),
@@ -392,15 +394,16 @@ function AddTextLabel(Parent, Configs)
     local Name = Configs[1] or Configs.Name or Configs.Text or "TextLabel"
     
     local TextFrame = Create("Frame", Parent, {
+        Name = "TextLabel",
         Size = UDim2.new(0, 490, 0, 40),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         BackgroundTransparency = 0
     })
-    Corner(TextFrame)
+    Corner(TextFrame, UDim.new(0.3, 0)) 
 
     local TextLabel = Create("TextLabel", TextFrame, {
-        Size = UDim2.new(0, 200, 0, 40),
+        Size = UDim2.new(0, 475, 0, 40),
         Position = UDim2.new(0, 10, 0, 0),
         Text = Name,
         Font = Enum.Font.FredokaOne,
@@ -421,15 +424,16 @@ function AddParagraph(Parent, Configs)
     local Description = Configs[2] or Configs.Description or "My Paragraph"
     
     local ParagraphFrame = Create("Frame", Parent, {
-        Size = UDim2.new(0, 490, 0, 45),
+        Name = "Paragraph",
+        Size = UDim2.new(0, 490, 0, 60),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         BackgroundTransparency = 0
     })
-    Corner(ParagraphFrame)
+    Corner(ParagraphFrame, UDim.new(0.3, 0)) 
 
     local ParagraphLabel1 = Create("TextLabel", ParagraphFrame, {
-        Size = UDim2.new(0, 200, 0, 40),
+        Size = UDim2.new(0, 475, 0, 40),
         Position = UDim2.new(0, 10, 0, 1),
         Text = Name,
         Font = Enum.Font.FredokaOne,
@@ -443,7 +447,7 @@ function AddParagraph(Parent, Configs)
     })
   
   local ParagraphLabel2 = Create("TextLabel", ParagraphFrame, {
-        Size = UDim2.new(0, 200, 0, 50),
+        Size = UDim2.new(0, 475, 0, 50),
         Position = UDim2.new(0, 10, 0, 10),
         Text = Description,
         Font = Enum.Font.FredokaOne,
@@ -459,6 +463,104 @@ function AddParagraph(Parent, Configs)
     return ParagraphFrame
 end
 
+function AddSlider(Parent, Configs)
+    local Name = Configs[1] or Configs.Name or Configs.Text or "Slider"
+    local Min = Configs[2] or Configs.Min or 0
+    local Max = Configs[3] or Configs.Max or 100
+    local Default = Configs[5] or Configs.Default or Min
+    local Increase = Configs[4] or Configs.Increase or 1
+    local Callback = Configs[6] or Configs.Callback or function() end
+
+    Min, Max = Min / Increase, Max / Increase
+
+    local SliderFrame = Create("Frame", Parent, {
+        Size = UDim2.new(0, 490, 0, 70),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+    })
+    Corner(SliderFrame, UDim.new(0.3, 0)) 
+
+    local SliderLabel = Create("TextLabel", SliderFrame, {
+        Text = Name,
+        Size = UDim2.new(1, -60, 0, 25),
+        Position = UDim2.new(0, 10, 0, 5),
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        BackgroundTransparency = 1,
+        TextSize = 20,
+        TextXAlignment = Enum.TextXAlignment.Left,
+    })
+  
+  local SliderValueLabel = Create("TextLabel", SliderFrame, {
+        Text = Name,
+        Size = UDim2.new(1, -60, 0, 25),
+        Position = UDim2.new(0, 10, 0, 5),
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        BackgroundTransparency = 1,
+        TextSize = 20,
+        TextTruncate = "AtEnd",
+        TextXAlignment = Enum.TextXAlignment.Left,
+    })
+
+    local SliderBarBackground = Create("Frame", SliderFrame, {
+        Size = UDim2.new(1, -20, 0, 8),
+        Position = UDim2.new(0, 20, 0, 50),
+        BackgroundColor3 = Color3.fromRGB(120, 120, 120),
+    })
+    Corner(SliderBarBackground)
+
+    local SliderBar = Create("Frame", SliderBarBackground, {
+        Size = UDim2.fromScale((Default - Min) / (Max - Min), 1),
+        BackgroundColor3 = Color3.fromRGB(0, 185, 255),
+    })
+    Corner(SliderBar)
+
+    local SliderButton = Create("Frame", SliderBarBackground, {
+        Size = UDim2.new(0, 12, 0, 24),
+        Position = UDim2.fromScale((Default - Min) / (Max - Min), 0.5),
+        AnchorPoint = Vector2.new(0.5, 0.5),
+        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+    })
+    Corner(SliderButton)
+
+    local function SnapToIncrease(value)
+        return math.floor(value / Increase + 0.5) * Increase
+    end
+
+    local function UpdateSliderValue(position)
+        local scaledValue = math.clamp(position, 0, 1)
+        local newValue = math.floor((scaledValue * (Max - Min)) + Min)
+        newValue = SnapToIncrease(newValue)
+
+        SliderButton.Position = UDim2.new(scaledValue, 0, 0.5, 0)
+        SliderBar.Size = UDim2.new(scaledValue, 0, 1, 0)
+        SliderValueLabel.Text = tostring(newValue * Increase)
+        Callback(newValue * Increase)
+    end
+
+    local dragging = false
+
+    SliderButton.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            local connection
+            connection = UIS.InputChanged:Connect(function(input)
+                if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+                    local relativePosition = (input.Position.X - SliderBarBackground.AbsolutePosition.X) / SliderBarBackground.AbsoluteSize.X
+                    UpdateSliderValue(relativePosition)
+                end
+            end)
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                    connection:Disconnect()
+                end
+            end)
+        end
+    end)
+
+    UpdateSliderValue((Default - Min) / (Max - Min))
+end
 
 end
 
