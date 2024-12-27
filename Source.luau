@@ -916,6 +916,226 @@ function AddDropDown(Parent, Configs)
     return ListDrop
 end
 
+function AddFloatToggle(Configs)
+  local Name = Configs[1] or Configs.Name or Configs.Text or "Toggle"
+  local Callback = Configs[2] or Configs.Callback or function() end
+  
+  local FloatToggle = Create("Frame", ScreenGui, {
+    Size = UDim2.new(0, 100, 0, 60),
+    Position = UDim2.new(0.8, 0, 0.8, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    BackgroundColor3 = Color3.fromRGB(35, 35, 35),
+    Draggable = true,
+    Active = true,
+    Visible = true,
+  })Corner(FloatToggle)
+   MakeDrag(FloatToggle)
+  
+  local TextLabel = Create("TextLabel", FloatToggle, {
+    Size = UDim2.new(1, 0, 0, 20),
+    TextSize = 20,
+    Font = Enum.Font.FredokaOne,
+    TextColor3 = Color3.fromRGB(240, 240, 240),
+    Text = Name,
+    BackgroundTransparency = 1,
+    TextScaled = true,
+  })
+  
+  local Button = Create("TextButton", FloatToggle, {
+    Size = UDim2.new(1, 0, 0, 40),
+    Position = UDim2.new(0, 0, 0, 20),
+    BackgroundTransparency = 1,
+    Text = ""
+  })
+  
+  local Frame = Create("Frame", Button, {
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Size = UDim2.new(1, -40, 1, -15),
+    BackgroundTransparency = 0
+  })Corner(Frame, UDim.new(2, 0))
+  
+  local Frame2 = Create("Frame", Frame, {
+    Position = UDim2.new(0, 5, 0.5, 0),
+    AnchorPoint = Vector2.new(0, 0.5),
+    Size = UDim2.new(0, 17, 0, 17),
+    BackgroundTransparency = 1
+  })Corner(Frame2, UDim.new(5, 0))
+  
+  local Stroke1 = Stroke(Frame, Color3.fromRGB(120, 120, 120), 3)
+  local Stroke2 = Stroke(Frame2, Color3.fromRGB(160, 160, 160), 2.6)
+  
+  local State = false
+  Callback(State)
+  Button.MouseButton1Click:Connect(function()
+    if State then
+      SetProps(Stroke1, {
+        Color = Color3.fromRGB(70, 70, 70)
+      })
+    SetProps(Stroke2, {
+        Color = Color3.fromRGB(160, 160, 160)
+      })
+      TweenService:Create(Frame2, TweenInfo.new(0.2, Enum.EasingStyle.Linear),
+      {Position = UDim2.new(1, -22, 0.5, 0)}):Play()
+    State = false
+    else
+      TweenService:Create(Frame2, TweenInfo.new(0.2, Enum.EasingStyle.Linear),
+      {Position = UDim2.new(0, 5, 0.5, 0)}):Play()
+    end
+    SetProps(Stroke1, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+    SetProps(Stroke2, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+    State = true
+    Callback(State)
+  end)
+  
+  return FloatToggle
+end
+
+function AddMinimizeButton(Configs)
+  local ImageId = Configs[1] or Configs.Icon or Configs.Logo or "10734897102"
+  
+  if not ImageId:find("rbxassetid://") then
+       ImageId = "rbxassetid://" .. ImageId
+       end
+  
+  local MinimizeButton = Create("ImageButton", ScreenGui, {
+    Image = ImageId,
+    AnchorPoint = Vector2.new(0, 0),
+    Size = UDim2.new(0, 50, 0, 50),
+    Position = UDim2.new(0, 117, 0, 68),
+    BackgroundColor3 = Color3.fromRGB(50, 50, 50),
+    Visible = true
+  })Stroke(MinimizeButton)
+Corner(MinimizeButton, UDim.new(0, 9))
+MakeDrag(MinimizeButton)
+  
+  local MinimizeButtonState = true
+  MinimizeButton.MouseButton1Click:Connect(function()
+    if MinimizeButtonState then
+      local tweenClose = TweenService:Create(MainFrame, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Size = UDim2.new(0, 0, 0, 0)})
+  tweenClose:Play()
+  tweenClose.Completed:Wait()
+      SetProps(MainFrame, {
+        Visible = false
+      })
+      MinimizeButtonState = false
+      else
+        SetProps(MainFrame, {
+        Visible = true
+      })
+        MinimizeButtonState = true
+        local tweenOpen = TweenService:Create(MainFrame, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Size = UDim2.new(0.5, 0, 0.6, 0)})
+  tweenOpen:Play()
+  tweenOpen.Completed:Wait()
+end
+end)
+  
+  end
+
+function AddDiscordInvite(Parent, Configs)
+  local Name = Configs[1] or Configs.Name or Configs.Text or "DarkMoonHub Community"
+  local Description = Configs[2] or Configs.Description or "Join our discord community to receive information about the next update"
+  local Logo = Configs[3] or Configs.Logo or Configs.Icon or "10734897102"
+  local Invite = Configs[4] or Configs.Invite or "https://discord.gg/YDXM43cBU6"
+  
+  if not Logo:find("rbxassetid://") then
+       Logo = "rbxassetid://" .. Logo
+       end
+  
+  local DiscordInviteFrame = Create("Frame", Parent, {
+        Size = UDim2.new(0, 490, 0, 120),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 0,
+    })
+    Corner(DiscordInviteFrame, UDim.new(0, 13))
+
+    local ServerName = Create("TextLabel", DiscordInviteFrame, {
+        Name = "ServerName",
+        Size = UDim2.new(0, 200, 0, 40),
+        Position = UDim2.new(0, 10, 0, -7),
+        Text = Name,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(243, 243, 243),
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextWrapped = false,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+  
+  local Description = Create("TextLabel", DiscordInviteFrame, {
+        Name = "Description",
+        Size = UDim2.new(0, 400, 0, 40),
+        Position = UDim2.new(0, 80, 0, 20),
+        Text = Description,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(180, 180, 180),
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextWrapped = true,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+  
+  local ServerInviteLink = Create("TextLabel", DiscordInviteFrame, {
+        Name = "ServerInviteLink",
+        Size = UDim2.new(0, 200, 0, 40),
+        Position = UDim2.new(0, 80, 0, 50),
+        Text = Invite,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(40, 150, 255),
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextWrapped = false,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+  
+  local ServerIcon = Create("ImageLabel", DiscordInviteFrame, {
+     Name = "ServerIcon",
+     Image = Logo,
+     Size = UDim2.new(0, 60, 0, 60),
+     Position = UDim2.new(1, -475, 0, 20),
+     BackgroundTransparency = 1
+   })Corner(ServerIcon, UDim.new(0, 4))Stroke(ServerIcon)
+  
+  local JoinButton = Create("TextButton", DiscordInviteFrame, {
+    Name = "JoinButton",
+    Size = UDim2.new(1, -14, 0, 30),
+    AnchorPoint = Vector2.new(0.5, 1),
+    Position = UDim2.new(0.5, 0, 1, -7),
+    Text = "Join Server",
+    Font = Enum.Font.FredokaOne,
+    TextSize = 12,
+    TextScaled = true,
+    TextColor3 = Color3.fromRGB(255, 255, 255),
+    BackgroundColor3 = Color3.fromRGB(50, 150, 50)
+  })Corner(JoinButton, UDim.new(0, 6))
+  
+  local ClickDelay
+      JoinButton.Activated:Connect(function()
+        setclipboard(Invite)
+        if ClickDelay then return end
+        
+        ClickDelay = true
+        SetProps(JoinButton, {
+          Text = "Copied to Clipboard!",
+          BackgroundColor3 = Color3.fromRGB(100, 100, 100),
+          TextColor3 = Color3.fromRGB(150, 150, 150)
+        })task.wait(5)
+        SetProps(JoinButton, {
+          Text = "Join Server",
+          BackgroundColor3 = Color3.fromRGB(50, 150, 50),
+          TextColor3 = Color3.fromRGB(255, 255, 225)
+        })ClickDelay = false
+      end)
+  
+end
 
 end
 
