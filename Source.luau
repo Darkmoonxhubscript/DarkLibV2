@@ -739,7 +739,7 @@ function AddDropDown(Parent, Configs)
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         BackgroundTransparency = 0
     })
-    Corner(DropdownFrame, UDim.new(0.3, 0))
+    Corner(DropdownFrame, UDim.new(0, 13))
     
     local DropButton = Create("TextButton", DropdownFrame, {
         Size = UDim2.new(0, 30, 0, 30),
@@ -857,6 +857,8 @@ function AddDropDown(Parent, Configs)
     })Corner(BagulhoAzul)
     
     if TextLabel.Text == Default then
+      local tween1 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
+        tween1:Play()
       NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
       NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
       Callback(Default)
