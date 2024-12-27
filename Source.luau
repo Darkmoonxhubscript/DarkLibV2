@@ -610,7 +610,7 @@ function AddSlider(Parent, Configs)
     Corner(SliderBar)
 
     local SliderButton = Create("Frame", SliderBarBackground, {
-        Size = UDim2.new(0, 12, 0, 24),
+        Size = UDim2.new(0, 10, 0, 24),
         Position = UDim2.fromScale((Default - Min) / (Max - Min), 0.5),
         AnchorPoint = Vector2.new(0.5, 0.5),
         BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -682,7 +682,7 @@ function AddToggle(Parent, Configs)
     local ToggleActive = Create("Frame", ToggleFrame1, {
         Size = UDim2.new(0, 25, 0, 25),
         Position = UDim2.new(0, 413, 0, 8),
-        AnchorPoint = Vector2.new(0, 0.5),
+        AnchorPoint = Vector2.new(0, 0.02),
         BackgroundColor3 = Color3.fromRGB(160, 160, 160),
         BackgroundTransparency = 0.5
     })
