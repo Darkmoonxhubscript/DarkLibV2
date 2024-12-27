@@ -685,7 +685,7 @@ function AddToggle(Parent, Configs)
         BackgroundColor3 = Color3.fromRGB(160, 160, 160),
         BackgroundTransparency = 0
     })
-    local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2.6)
+    local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2.8)
     Corner(ToggleActive, UDim.new(5, 0))
 
     local ToggleState = false
@@ -1042,7 +1042,7 @@ function AddFloatToggle(Configs)
     Position = UDim2.new(0.5, 0, 0.5, 0),
     AnchorPoint = Vector2.new(0.5, 0.5),
     Size = UDim2.new(1, -40, 1, -15),
-    BackgroundTransparency = 0
+    BackgroundTransparency = 1
   })Corner(Frame, UDim.new(2, 0))
   
   local Frame2 = Create("Frame", Frame, {
@@ -1052,38 +1052,26 @@ function AddFloatToggle(Configs)
     BackgroundTransparency = 1
   })Corner(Frame2, UDim.new(5, 0))
   
-  local Stroke1 = Stroke(Frame, Color3.fromRGB(120, 120, 120), 3)
-  local Stroke2 = Stroke(Frame2, Color3.fromRGB(160, 160, 160), 2.6)
+  Stroke(Frame, Color3.fromRGB(120, 120, 120), 1)
+  Stroke(Frame2, Color3.fromRGB(120, 120, 120), 1)
   
-  local State = false
-  Callback(State)
+  local OnOff = false
+  Callback(OnOff)
   Button.MouseButton1Click:Connect(function()
-    if State then
-      SetProps(Stroke1, {
-        Color = Color3.fromRGB(70, 70, 70)
-      })
-    SetProps(Stroke2, {
-        Color = Color3.fromRGB(160, 160, 160)
-      })
+    if OnOff == false then
       TweenService:Create(Frame2, TweenInfo.new(0.2, Enum.EasingStyle.Linear),
       {Position = UDim2.new(1, -22, 0.5, 0)}):Play()
-    State = false
     else
       TweenService:Create(Frame2, TweenInfo.new(0.2, Enum.EasingStyle.Linear),
       {Position = UDim2.new(0, 5, 0.5, 0)}):Play()
     end
-    SetProps(Stroke1, {
-        Color = Color3.fromRGB(0, 185, 255)
-      })
-    SetProps(Stroke2, {
-        Color = Color3.fromRGB(0, 185, 255)
-      })
-    State = true
-    Callback(State)
+    OnOff = not OnOff
+    Callback(OnOff)
   end)
   
   return FloatToggle
 end
+
 
 function AddMinimizeButton(Configs)
   local ImageId = Configs[1] or Configs.Icon or Configs.Logo or "10734897102"
