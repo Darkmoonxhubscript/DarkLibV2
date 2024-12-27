@@ -195,9 +195,9 @@ function NewTab(Configs)
     local TabButton
     local TabFrame
      
-     if not TabIcon:find("rbxassetid://") then
-       TabIcon = "rbxassetid://" .. TabIcon
-       end
+    if not TabIcon:find("rbxassetid://") then
+        TabIcon = "rbxassetid://" .. TabIcon
+    end
      
     if not FirstTab then
         FirstTab = TabName
@@ -222,30 +222,31 @@ function NewTab(Configs)
     Corner(TabButton, UDim.new(0.3, 0))  
     
     local BagulhoAzul = Create("Frame", TabButton, {
-    Position = UDim2.new(0, 0, 0, 0),
-    BackgroundColor3 = Color3.fromRGB(0, 165, 255),
-    Size = UDim2.new(0, 10, 0, 20),
-    BackgroundTransparency = 0
-    })Corner(BagulhoAzul)
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(0, 165, 255),
+        Size = UDim2.new(0, 10, 0, 30),
+        BackgroundTransparency = 1 -- Inicialmente invisível
+    })
+    Corner(BagulhoAzul)
     
     local TabNameLabel = Create("TextLabel", TabButton,{
-      Text = TabName,
-      BackgroundTransparency = 1,
-      TextColor3 = Color3.fromRGB(240, 240, 240),
-      Font = Enum.Font.FredokaOne,
-      TextSize = 15,
-      TextDirection = "LeftToRight",
-      TextXAlignment = Enum.TextXAlignment.Left,
-      TextYAlignment = Enum.TextYAlignment.Center,
-      Size = UDim2.new(0, 122, 0, 20),
-      Position = UDim2.new(0, 25, 0, 5)
+        Text = TabName,
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        Font = Enum.Font.FredokaOne,
+        TextSize = 15,
+        TextDirection = "LeftToRight",
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center,
+        Size = UDim2.new(0, 110, 0, 20),
+        Position = UDim2.new(0, 35, 0, 5)
     })
   
     local TabIcon = Create("ImageLabel", TabButton, {
-      Image = TabIcon,
-      Size = UDim2.new(0, 20, 0, 20),
-      Position = UDim2.new(0, 3, 0, 5),
-      BackgroundTransparency = 1
+        Image = TabIcon,
+        Size = UDim2.new(0, 20, 0, 20),
+        Position = UDim2.new(0, 10, 0, 5),
+        BackgroundTransparency = 1
     })
 
     TabFrame = Create("ScrollingFrame", RightScrollFrame, {
@@ -267,10 +268,9 @@ function NewTab(Configs)
 
     Tabs[TabName] = TabFrame
 
-    
     if SelectedTab == TabName then
         TabFrame.Visible = true
-        local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.3, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
+        local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
         tween:Play()
         TabButton.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
     end
@@ -278,15 +278,20 @@ function NewTab(Configs)
     TabButton.MouseButton1Click:Connect(function()
         for _, button in pairs(LeftScrollFrame:GetChildren()) do
             if button:IsA("TextButton") then
-                local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.1, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
-                tween:Play()
+
+                local azul = button:FindFirstChild("Frame")
+                if azul then
+                    local tween = TweenService:Create(azul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
+                    tween:Play()
+                end
                 button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
             end
         end
-        
-        local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.3, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
+
+        local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
         tween:Play()
         TabButton.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
+
         for _, frame in pairs(Tabs) do
             frame.Visible = false
         end
@@ -297,6 +302,7 @@ function NewTab(Configs)
 
     return TabFrame
 end
+
 
 function AddButton(Parent, Configs)
     local Name = Configs[1] or Configs.Name or Configs.Text or "Button"
