@@ -683,7 +683,7 @@ function AddToggle(Parent, Configs)
         Size = UDim2.new(0, 25, 0, 25),
         Position = UDim2.new(0, 413, 0, 8),
         BackgroundColor3 = Color3.fromRGB(160, 160, 160),
-        BackgroundTransparency = 0
+        BackgroundTransparency = 0.5
     })
     local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2.8)
     Corner(ToggleActive, UDim.new(5, 0))
@@ -947,8 +947,8 @@ function AddDropDown(Parent, Configs)
     })Corner(BagulhoAzul)
     
     if TextLabel.Text == Default then
-      local tween1 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
-        tween1:Play()
+      local tween5 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
+        tween5:Play()
       NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
       NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
       Callback(Default)
@@ -1125,6 +1125,7 @@ function AddDiscordInvite(Parent, Configs)
        end
   
   local DiscordInviteFrame = Create("Frame", Parent, {
+        Name = "DiscordInvite",
         Size = UDim2.new(0, 490, 0, 120),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
