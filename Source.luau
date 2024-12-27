@@ -482,18 +482,19 @@ function AddSlider(Parent, Configs)
     local SliderLabel = Create("TextLabel", SliderFrame, {
         Text = Name,
         Size = UDim2.new(1, -300, 0, 25),
-        Position = UDim2.new(0, 10, 0, 6),
+        Position = UDim2.new(0, 10, 0, 8),
         Font = Enum.Font.FredokaOne,
         TextColor3 = Color3.fromRGB(240, 240, 240),
         BackgroundTransparency = 1,
         TextSize = 20,
+        TextTruncate = "AtEnd",
         TextXAlignment = Enum.TextXAlignment.Left,
     })
   
   local SliderValueLabel = Create("TextLabel", SliderFrame, {
         Text = Name,
-        Size = UDim2.new(1, -400, 0, 25),
-        Position = UDim2.new(0, 198, 0, 6),
+        Size = UDim2.new(1, -425, 0, 25),
+        Position = UDim2.new(0, 215, 0, 8),
         Font = Enum.Font.FredokaOne,
         TextColor3 = Color3.fromRGB(240, 240, 240),
         BackgroundTransparency = 1,
