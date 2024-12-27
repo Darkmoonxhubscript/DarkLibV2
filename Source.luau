@@ -360,6 +360,106 @@ function AddButton(Parent, Configs)
     return Button
 end
 
+function AddSection(Parent, Configs)
+    local Name = Configs[1] or Configs.Name or Configs.Text or "Section"
+    
+    local SectionFrame = Create("Frame", Parent, {
+        Size = UDim2.new(0, 490, 0, 40),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 0
+    })
+    Corner(SectionFrame)
+
+    local SectionLabel = Create("TextLabel", SectionFrame, {
+        Size = UDim2.new(0, 490, 0, 40),
+        Position = UDim2.new(0, 0, 0, 0),
+        Text = Name,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextWrapped = false,
+        TextTruncate = "AtEnd",
+        TextXAlignment = Enum.TextXAlignment.Center,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+
+    return SectionFrame
+end
+
+function AddTextLabel(Parent, Configs)
+    local Name = Configs[1] or Configs.Name or Configs.Text or "TextLabel"
+    
+    local TextFrame = Create("Frame", Parent, {
+        Size = UDim2.new(0, 490, 0, 40),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 0
+    })
+    Corner(TextFrame)
+
+    local TextLabel = Create("TextLabel", TextFrame, {
+        Size = UDim2.new(0, 200, 0, 40),
+        Position = UDim2.new(0, 10, 0, 0),
+        Text = Name,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextWrapped = false,
+        TextTruncate = "AtEnd",
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+
+    return TextFrame
+end
+
+function AddParagraph(Parent, Configs)
+    local Name = Configs[1] or Configs.Name or Configs.Text or "My Title"
+    local Description = Configs[2] or Configs.Description or "My Paragraph"
+    
+    local ParagraphFrame = Create("Frame", Parent, {
+        Size = UDim2.new(0, 490, 0, 45),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 0
+    })
+    Corner(ParagraphFrame)
+
+    local ParagraphLabel1 = Create("TextLabel", ParagraphFrame, {
+        Size = UDim2.new(0, 200, 0, 40),
+        Position = UDim2.new(0, 10, 0, 1),
+        Text = Name,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextWrapped = false,
+        TextTruncate = "AtEnd",
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Top
+    })
+  
+  local ParagraphLabel2 = Create("TextLabel", ParagraphFrame, {
+        Size = UDim2.new(0, 200, 0, 50),
+        Position = UDim2.new(0, 10, 0, 10),
+        Text = Description,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(150, 150, 150),
+        TextSize = 17,
+        BackgroundTransparency = 1,
+        TextWrapped = true,
+        TextTruncate = "AtEnd",
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+
+    return ParagraphFrame
+end
+
+
 end
 
 return DarkLib
