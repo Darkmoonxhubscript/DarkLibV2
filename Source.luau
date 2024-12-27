@@ -498,6 +498,7 @@ function AddSlider(Parent, Configs)
         TextColor3 = Color3.fromRGB(240, 240, 240),
         BackgroundTransparency = 1,
         TextSize = 20,
+        TextScaled = true,
         TextTruncate = "AtEnd",
         TextDirection = "RightToLeft",
         TextXAlignment = Enum.TextXAlignment.Right
