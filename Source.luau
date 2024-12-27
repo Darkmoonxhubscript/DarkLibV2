@@ -682,6 +682,7 @@ function AddToggle(Parent, Configs)
     local ToggleActive = Create("Frame", ToggleFrame1, {
         Size = UDim2.new(0, 25, 0, 25),
         Position = UDim2.new(0, 413, 0, 8),
+        AnchorPoint = Vector2.new(0, 0.5),
         BackgroundColor3 = Color3.fromRGB(160, 160, 160),
         BackgroundTransparency = 0.5
     })
