@@ -154,7 +154,7 @@ function NewNotify(Configs)
         AutomaticSize = Enum.AutomaticSize.Y
     })
     Stroke(Frame2, Color3.fromRGB(200, 200, 200), 1)
-    Corner(Frame2, UDim.new(0, 15))
+    Corner(Frame2, UDim.new(0, 5))
 
     Create("TextLabel", Frame2, {
         Size = UDim2.new(1, -30, 0, 25),
