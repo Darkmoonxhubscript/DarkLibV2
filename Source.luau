@@ -720,11 +720,14 @@ function AddToggle(Parent, Configs)
     Corner(ToggleFrame2, UDim.new(2, 0))
 
     local ToggleActive = Create("Frame", ToggleFrame1, {
-        Size = UDim2.new(0, 25, 0, 25),
-        Position = UDim2.new(0, 413, 0, 8),
-        AnchorPoint = Vector2.new(0, 0.02),
+        Size = UDim2.new(0, 23, 0, 21),
+        Position = UDim2.new(1, -37, 0, 28),
+        AnchorPoint = Vector2.new(0, 0.9),
         BackgroundColor3 = Color3.fromRGB(160, 160, 160),
-        BackgroundTransparency = 0.5
+        BackgroundTransparency = 0,
+        BorderMode = "Middle",
+        BorderSizePixel = 3
+        
     })
     local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2.8)
     Corner(ToggleActive, UDim.new(5, 0))
