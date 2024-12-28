@@ -659,7 +659,7 @@ end
 function AddToggle(Parent, Configs)
     local Name = Configs[1] or Configs.Name or Configs.Text or "Toggle"
     local Default = Configs[2] or Configs.Default or false
-    local Callback = Configs.Callback or function() end
+    local Callback = Configs[3] or Configs.Callback or function() end
 
     local ToggleFrame1 = Create("Frame", Parent, {
         Name = "Toggle",
@@ -670,6 +670,7 @@ function AddToggle(Parent, Configs)
     })
     Corner(ToggleFrame1, UDim.new(0.3, 0))
 
+    
     local ToggleFrame2 = Create("Frame", ToggleFrame1, {
         Size = UDim2.new(0, 70, 0, 30),
         Position = UDim2.new(1, -80, 0, 5),
@@ -752,6 +753,98 @@ function AddToggle(Parent, Configs)
       BackgroundColor3 = Color3.fromRGB(0, 185, 255),
     })
           local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -37, 0, 8)})
+          tween:Play()
+          tween.Completed:Wait()
+            ToggleState = true
+        end
+        Callback(ToggleState)
+    end)
+
+    return {ToggleActive, Callback, ToggleState}
+end
+
+function AddSquareToggle(Parent, Configs)
+    local Name = Configs[1] or Configs.Name or Configs.Text or "Toggle"
+    local Default = Configs[2] or Configs.Default or false
+    local Callback = Configs[3] or Configs.Callback or function() end
+
+    local ToggleFrame1 = Create("Frame", Parent, {
+        Name = "Toggle",
+        Size = UDim2.new(0, 490, 0, 40),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        BackgroundTransparency = 0
+    })
+    Corner(ToggleFrame1, UDim.new(0.3, 0))
+
+    
+    local ToggleFrame2 = Create("Frame", ToggleFrame1, {
+        Size = UDim2.new(0, 70, 0, 30),
+        Position = UDim2.new(1, -80, 0, 5),
+        BackgroundColor3 = Color3.fromRGB(70, 70, 70),
+        BackgroundTransparency = 0
+    })
+    local Stroke1 = Stroke(ToggleFrame2, Color3.fromRGB(100, 100, 100), 3)
+    Corner(ToggleFrame2, UDim.new(0, 2))
+
+    local ToggleActive = Create("Frame", ToggleFrame1, {
+        Size = UDim2.new(0, 25, 0, 25),
+        Position = UDim2.new(0, 413, 0, 8),
+        AnchorPoint = Vector2.new(0, 0.02),
+        BackgroundColor3 = Color3.fromRGB(160, 160, 160),
+        BackgroundTransparency = 0
+    })
+    local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2.8)
+    Corner(ToggleActive, UDim.new(0, 2))
+
+    local ToggleState = false
+    if Default then
+      SetProps(ToggleActive, {
+        Visible = true
+      })
+      local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Size = UDim2.new(0, 25, 0, 25),})
+          tween:Play()
+          tween.Completed:Wait()
+        ToggleState = true
+    end
+
+    Callback(ToggleState)
+
+    local TextToggle = Create("TextLabel", ToggleFrame1, {
+        Text = Name,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        Font = Enum.Font.FredokaOne,
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        Size = UDim2.new(0, 200, 0, 40),
+        Position = UDim2.new(0, 10, 0, 0),
+        BorderSizePixel = 0,
+        ClipsDescendants = true,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Center
+    })
+
+    local ToggleButtonArea = Create("TextButton", ToggleFrame1, {
+        Text = "",
+        Size = UDim2.new(0, 70, 0, 30),
+        Position = UDim2.new(1, -80, 0, 5),
+        BackgroundTransparency = 1
+    })
+
+    ToggleButtonArea.MouseButton1Click:Connect(function()
+        if ToggleState then
+      local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Size = UDim2.new(0, 0, 0, 0),})
+          tween:Play()
+          tween.Completed:Wait()
+          SetProps(ToggleActive, {
+        Visible = false
+      })
+            ToggleState = false
+        elseif not ToggleState then
+          SetProps(ToggleActive, {
+        Visible = true
+      })
+      local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Size = UDim2.new(0, 25, 0, 25),})
           tween:Play()
           tween.Completed:Wait()
             ToggleState = true
