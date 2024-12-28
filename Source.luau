@@ -722,6 +722,9 @@ function AddToggle(Parent, Configs)
     SetProps(Stroke2, {
         Color = Color3.fromRGB(0, 185, 255)
       })
+    SetProps(ToggleActive, {
+      BackgroundColor3 = Color3.fromRGB(0, 185, 255),
+    })
       local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -37, 0, 8)})
           tween:Play()
           tween.Completed:Wait()
