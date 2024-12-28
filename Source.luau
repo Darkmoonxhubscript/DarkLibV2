@@ -1244,6 +1244,10 @@ function AddDiscordInvite(Parent, Configs)
   
 end
 
+function EndLibrary()
+  ScreenGui:Destroy()
+  end
+
 end
 
 return darklib
