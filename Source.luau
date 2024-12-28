@@ -346,7 +346,7 @@ function NewTab(Configs)
     local TabNameLabel = Create("TextLabel", TabButton,{
         Text = TabName,
         BackgroundTransparency = 1,
-        TextColor3 = Color3.fromRGB(240, 240, 240),
+        TextColor3 = Color3.fromRGB(200, 200, 200),
         Font = Enum.Font.FredokaOne,
         TextSize = 15,
         TextDirection = "LeftToRight",
@@ -383,6 +383,9 @@ function NewTab(Configs)
     Tabs[TabName] = TabFrame
 
     if SelectedTab == TabName then
+      SetProps(TabNameLabel, {
+        TextColor3 = Color3.fromRGB(240, 240, 240)
+      })
         TabFrame.Visible = true
         local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
         tween:Play()
@@ -398,12 +401,24 @@ function NewTab(Configs)
                     local tween = TweenService:Create(azul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
                     tween:Play()
                 end
+                
                 button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
             end
         end
-
+        
+        for _, Text in pairs(LeftScrollFrame:GetDescendants()) do
+            if Text:IsA("TextLabel") then
+              SetProps(Text, {
+        TextColor3 = Color3.fromRGB(200, 200, 200)
+      })
+            end
+            end
+        
         local tween = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
         tween:Play()
+        SetProps(TabNameLabel, {
+        TextColor3 = Color3.fromRGB(240, 240, 240)
+      })
         TabButton.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
 
         for _, frame in pairs(Tabs) do
