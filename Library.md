@@ -11,6 +11,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Darkmoonxhubscript/Da
 ```luau
 --[[
 Loads The Library
+
+-- ///////// Functions ///////// --
+EndLibrary() >> Destroy The Library.
 ]]
 ```
 ## Make a Window
