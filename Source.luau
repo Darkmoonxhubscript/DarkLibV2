@@ -2,6 +2,10 @@ local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local CoreGui = game:GetService("CoreGui")
 
+local darklib = {
+  Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/Darkmoonxhubscript/DarkLibV2/refs/heads/main/Icons.luau"))()
+}
+
 local Tabs = {}
 
 local function SetProps(Instance, Props)
@@ -45,6 +49,25 @@ end
 
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 660
+
+function GetIcon(IconName)
+  if IconName:find("rbxassetid://") or IconName:len() < 1 then return IconName end
+  IconName = IconName:lower():gsub("lucide", ""):gsub("-", "")
+  
+  for Name, Icon in pairs(darklib.Icons) do
+    Name = Name:gsub("lucide", ""):gsub("-", "")
+    if Name == IconName then
+      return Icon
+    end
+  end
+  for Name, Icon in pairs(darklib.Icons) do
+    Name = Name:gsub("lucide", ""):gsub("-", "")
+    if Name:find(IconName) then
+      return Icon
+    end
+  end
+  return IconName
+end
 
 local function MakeDrag(Instance)
     local Dragging, DragInput, DragStart, StartPosition
@@ -281,12 +304,13 @@ local FirstTab = nil
 
 function NewTab(Configs)
     local TabName = Configs.Name or Configs.Text or "Tab Name"
-    local TabIcon = Configs.Icon or "0123456789"
+    local TabIcon = Configs.Icon or "House"
     local TabButton
     local TabFrame
      
-    if not TabIcon:find("rbxassetid://") then
-        TabIcon = "rbxassetid://" .. TabIcon
+     TabIcon = GetIcon(TabIcon)
+    if not TabIcon:find("rbxassetid://") or TabIcon:gsub("rbxassetid://", ""):len() < 6 then
+      TabIcon = false
     end
      
     if not FirstTab then
@@ -333,7 +357,7 @@ function NewTab(Configs)
     })
   
     local TabIcon = Create("ImageLabel", TabButton, {
-        Image = TabIcon,
+        Image = TabIcon or "",
         Size = UDim2.new(0, 20, 0, 20),
         Position = UDim2.new(0, 10, 0, 5),
         BackgroundTransparency = 1
@@ -1222,4 +1246,4 @@ end
 
 end
 
-return DarkLib
+return darklib
