@@ -87,6 +87,8 @@ local Toggle1 = AddToggle(Tab1, {
 ```
 ```luau
 --[[
+AddToggle >> Normal Toggle
+AddSquareToggle >> Square Toggle
 Name = "Toggle" >> Toggle Text (String)
 Default = false >> Defines whether the toggle starts out on or off (Bool)
 Callback = function(Value) --Value = toggle state
