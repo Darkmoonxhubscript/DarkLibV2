@@ -841,8 +841,8 @@ function AddTextBox(Parent, Configs)
     })
   
   local TextBox = Create("TextBox", TextBoxFrame, {
-    Size = UDim2.new(0, 80, 1, -10),
-    Position = UDim2.new(1, -90, 0, 5),
+    Size = UDim2.new(0, 120, 1, -10),
+    Position = UDim2.new(1, -130, 0, 5),
     ClearTextOnFocus = false,
     BackgroundColor3 = Color3.fromRGB(80, 80, 80),
     BackgroundTransparency = 0,
