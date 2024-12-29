@@ -747,9 +747,10 @@ function AddToggle(Parent, Configs)
           tween:Play()
           tween.Completed:Wait()
         ToggleState = true
+        Callback(ToggleState)
     end
 
-    Callback(ToggleState)
+    
 
     local TextToggle = Create("TextLabel", ToggleFrame1, {
         Text = Name,
