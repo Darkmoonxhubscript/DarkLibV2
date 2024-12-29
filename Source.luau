@@ -1055,6 +1055,17 @@ function AddDropDown(Parent, Configs)
     return ListDrop
 end
 
+function RefreshDropdown(Dropdown, NewOptions)
+  for _,v in pairs(Dropdown:GetChildren()) do
+    if v.Name == "Option" then
+      v:Destroy()
+    end
+  end
+  for i = 1, #NewOptions do
+    AddOption(NewOptions[i])
+  end
+end
+
 function AddFloatToggle(Configs)
   local Name = Configs[1] or Configs.Name or Configs.Text or "Toggle"
   local Callback = Configs[2] or Configs.Callback or function() end
