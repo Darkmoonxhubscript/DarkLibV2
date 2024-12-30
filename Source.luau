@@ -596,8 +596,8 @@ function AddSlider(Parent, Configs)
     local Name = Configs[1] or Configs.Name or Configs.Text or "Slider"
     local Min = Configs[2] or Configs.Min or 0
     local Max = Configs[3] or Configs.Max or 100
-    local Default = Configs[5] or Configs.Default or Min
     local Increase = Configs[4] or Configs.Increase or 1
+    local Default = Configs[5] or Configs.Default or 20
     local Callback = Configs[6] or Configs.Callback or function() end
 
     Min, Max = Min / Increase, Max / Increase
