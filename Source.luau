@@ -1312,13 +1312,13 @@ function AddDiscordInvite(Parent, Configs)
       return DiscordInviteFrame
 end
 
-function Object:Invisible()
+function ObjectInvisible(Object)
   SetProps(Object, {
     Visible = false
   })
   end
 
-function Object:Visible()
+function ObjectVisible(Object)
   SetProps(Object, {
     Visible = true
   })
