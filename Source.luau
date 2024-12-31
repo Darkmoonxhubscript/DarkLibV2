@@ -695,6 +695,8 @@ function AddSlider(Parent, Configs)
     end)
 
     UpdateSliderValue((Default - Min) / (Max - Min))
+    
+    return SliderFrame
 end
 
 function AddToggle(Parent, Configs)
@@ -808,7 +810,7 @@ function AddToggle(Parent, Configs)
         Callback(ToggleState)
     end)
 
-    return {ToggleActive, Callback, ToggleState}
+    return ToggleFrame1
 end
 
 
@@ -1094,7 +1096,7 @@ end
     Dropdown.CanvasSize = UDim2.new(0, 0, 0, #NewOptions * 25 + 10)
 end
 
-    return ListDrop
+    return DropdownFrame
 end
 
 function AddFloatToggle(Configs)
@@ -1203,7 +1205,7 @@ MakeDrag(MinimizeButton)
   tweenOpen.Completed:Wait()
 end
 end)
-  
+  return MinimizeButton
   end
 
 function AddDiscordInvite(Parent, Configs)
@@ -1306,9 +1308,8 @@ function AddDiscordInvite(Parent, Configs)
           TextColor3 = Color3.fromRGB(255, 255, 225)
         })ClickDelay = false
       end)
-      function DiscordInvite:Remove()
-        DiscordInviteFrame:Destroy()
-        end
+      
+      return DiscordInviteFrame
 end
 
 function EndLibrary()
