@@ -1093,7 +1093,7 @@ end
         table.insert(OpcoesAtuais, NewOptions[i])
     end
     
-    ListDrop.CanvasSize = UDim2.new(0, 0, 0, #NewOptions * 25 + 10)
+    --ListDrop.CanvasSize = UDim2.new(0, 0, 0, #NewOptions * 25 + 10)
 end
 
     return DropdownFrame
