@@ -1085,7 +1085,9 @@ end
         end
     end
     
-    OpcoesAtuais = {}
+    for V in pairs(OpcoesAtuais) do
+      table.remove(OpcoesAtuais, V)
+      end
     ListDrop.CanvasSize = UDim2.new(0, 0, 0, 0)
 
     for i = 1, #NewOptions do
@@ -1093,10 +1095,9 @@ end
         table.insert(OpcoesAtuais, NewOptions[i])
     end
     
-    --ListDrop.CanvasSize = UDim2.new(0, 0, 0, #NewOptions * 25 + 10)
 end
 
-    return DropdownFrame
+   return DropdownFrame
 end
 
 function AddFloatToggle(Configs)
