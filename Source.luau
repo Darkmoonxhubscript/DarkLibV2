@@ -1312,6 +1312,18 @@ function AddDiscordInvite(Parent, Configs)
       return DiscordInviteFrame
 end
 
+function Object:Invisible()
+  SetProps(Object, {
+    Visible = false
+  })
+  end
+
+function Object:Visible()
+  SetProps(Object, {
+    Visible = true
+  })
+  end
+
 function EndLibrary()
   ScreenGui:Destroy()
   end
