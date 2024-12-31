@@ -1053,18 +1053,18 @@ function AddDropDown(Parent, Configs)
     end
   end)
   ListDrop.CanvasSize = ListDrop.CanvasSize + UDim2.new(0, 0, 0, 10)
-    return ListDrop
-end
-
-function RefreshDropdown(Dropdown, NewOptions)
+  
+  function RefreshDropdown(Dropdown, NewOptions)
   for _,v in pairs(Dropdown:GetChildren()) do
     if v.Name == "Option" then
       v:Destroy()
     end
   end
   for i = 1, #NewOptions do
-    AddOption(NewOptions[i])
+    AddOption(NewOptions[i])  
   end
+end
+    return ListDrop
 end
 
 function AddFloatToggle(Configs)
