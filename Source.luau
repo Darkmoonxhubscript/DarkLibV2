@@ -331,7 +331,8 @@ function NewTab(Configs)
         TextXAlignment = Enum.TextXAlignment.Center,
         TextTruncate = "AtEnd",
         AutomaticSize = Enum.AutomaticSize.X,
-        Position = UDim2.new(0, 0, 0, 0)  
+        Position = UDim2.new(0, 0, 0, 0),
+        AutoButtonColor = false
     })
     Corner(TabButton, UDim.new(0.3, 0))  
     
@@ -450,7 +451,8 @@ function AddButton(Parent, Configs)
         BorderSizePixel = 0,
         ClipsDescendants = true,
         TextXAlignment = Enum.TextXAlignment.Left,
-        TextYAlignment = Enum.TextYAlignment.Center
+        TextYAlignment = Enum.TextYAlignment.Center,
+        AutoButtonColor = false
     })
     Corner(Button, UDim.new(0.3, 0)) 
 
@@ -872,6 +874,8 @@ function AddDropDown(Parent, Configs)
     local Default = Configs[3] or Configs.Default or "1"
     local Callback = Configs[4] or Configs.Callback or function() end
    
+   local OpcoesAtuais = {}
+   
     local DropdownFrame = Create("Frame", Parent, {
         Name = "Dropdown",
         Size = UDim2.new(0, 490, 0, 40),
@@ -883,7 +887,7 @@ function AddDropDown(Parent, Configs)
     
     local DropButton = Create("TextButton", DropdownFrame, {
         Size = UDim2.new(0, 30, 0, 30),
-        Position = UDim2.new(1, -30, 0, 5),
+        Position = UDim2.new(1, -40, 0, 5),
         BackgroundColor3 = Color3.fromRGB(45, 45, 45),
         BackgroundTransparency = 1,
         Text = ""
@@ -964,28 +968,30 @@ function AddDropDown(Parent, Configs)
  
    local function AddOption(Name)
     local NewOption = Create("TextButton", ListDrop, {
-      Name = "Option",
-      Size = UDim2.new(1, 0, 0, 20),
-      Text = "",
-      TextSize = 15,
-      Font = Enum.Font.FredokaOne,
-      TextColor3 = Color3.fromRGB(240, 240, 240),
-      BackgroundTransparency = 0.5,
-      TextXAlignment = "Left",
-      BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    })Corner(NewOption)
+        Name = "Option",
+        Size = UDim2.new(1, 0, 0, 20),
+        Text = "",
+        TextSize = 15,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        BackgroundTransparency = 0.5,
+        TextXAlignment = "Left",
+        AutoButtonColor = false,
+        BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    })
+    Corner(NewOption)
     
     local TextLabel = Create("TextLabel", NewOption, {
-      Name = "OptionTextLabel",
-      Size = UDim2.new(0, 450, 0, 20),
-      Position = UDim2.new(0, 12, 0, 0),
-      Text = Name,
-      TextSize = 15,
-      Font = Enum.Font.FredokaOne,
-      TextColor3 = Color3.fromRGB(240, 240, 240),
-      BackgroundTransparency = 1,
-      TextXAlignment = "Left",
-      TextWrapped = false
+        Name = "OptionTextLabel",
+        Size = UDim2.new(0, 450, 0, 20),
+        Position = UDim2.new(0, 12, 0, 0),
+        Text = Name,
+        TextSize = 15,
+        Font = Enum.Font.FredokaOne,
+        TextColor3 = Color3.fromRGB(240, 240, 240),
+        BackgroundTransparency = 1,
+        TextXAlignment = "Left",
+        TextWrapped = false
     })
     
     local BagulhoAzul = Create("Frame", NewOption, {
@@ -994,35 +1000,51 @@ function AddDropDown(Parent, Configs)
         BackgroundColor3 = Color3.fromRGB(0, 165, 255),
         Size = UDim2.new(0, 10, 0, 20),
         BackgroundTransparency = 1
-    })Corner(BagulhoAzul)
+    })
+    Corner(BagulhoAzul)
     
     if TextLabel.Text == Default then
-      local tween5 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
+        local tween5 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
         tween5:Play()
-      NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
-      NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
-      Callback(Default)
-      TextLabel.Text = Default
+        NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
+        NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
+        Callback(Default)
+        TextLabel.Text = Default
     end
     
     NewOption.MouseButton1Click:Connect(function()
-      for _,v in pairs(ListDrop:GetChildren()) do
-        if v.Name == "Option" then
-        local tween1 = TweenService:Create(v.BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
-        tween1:Play()
-          v.TextColor3 = Color3.fromRGB(240, 240, 240)
-          v.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+        for _, v in pairs(ListDrop:GetChildren()) do
+            if v.Name == "Option" then
+                local tween1 = TweenService:Create(v.BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 1})
+                tween1:Play()
+                v.TextColor3 = Color3.fromRGB(240, 240, 240)
+                v.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+            end
         end
-      end
-      local tween2 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
+
+        local tween2 = TweenService:Create(BagulhoAzul, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {BackgroundTransparency = 0})
         tween2:Play()
-      Callback(TextLabel.Text)
-      NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
-      NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
-      DropDownText2.Text = TextLabel.Text
+
+        Callback(TextLabel.Text)
+        NewOption.TextColor3 = Color3.fromRGB(240, 240, 240)
+        NewOption.BackgroundColor3 = Color3.fromRGB(120, 120, 120)
+        DropDownText2.Text = TextLabel.Text
     end)
-    ListDrop.CanvasSize = ListDrop.CanvasSize + UDim2.new(0, 0, 0, 25)
-     end
+
+    local isUnique = true
+    for _, V in pairs(OpcoesAtuais) do
+        if Name == V then
+            isUnique = false
+            break
+        end
+    end
+
+    if isUnique then
+        table.insert(OpcoesAtuais, Name)
+        ListDrop.CanvasSize = ListDrop.CanvasSize + UDim2.new(0, 0, 0, 25)
+    end
+end
+
  
    for i = 1, #Options do
      AddOption(Options[i])
@@ -1055,15 +1077,23 @@ function AddDropDown(Parent, Configs)
   ListDrop.CanvasSize = ListDrop.CanvasSize + UDim2.new(0, 0, 0, 10)
   
   function RefreshDropdown(Dropdown, NewOptions)
-  for _,v in pairs(Dropdown:GetChildren()) do
-    if v.Name == "Option" then
-      v:Destroy()
+    for _, v in pairs(Dropdown:GetChildren()) do
+        if v.Name == "Option" then
+            v:Destroy()
+        end
     end
-  end
-  for i = 1, #NewOptions do
-    AddOption(NewOptions[i])  
-  end
+    
+    OpcoesAtuais = {}
+    Dropdown.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+    for i = 1, #NewOptions do
+        AddOption(NewOptions[i])  
+        table.insert(OpcoesAtuais, NewOptions[i])
+    end
+    
+    Dropdown.CanvasSize = UDim2.new(0, 0, 0, #NewOptions * 25 + 10)
 end
+
     return ListDrop
 end
 
@@ -1147,7 +1177,8 @@ function AddMinimizeButton(Configs)
     Size = UDim2.new(0, 50, 0, 50),
     Position = UDim2.new(0, 117, 0, 68),
     BackgroundColor3 = Color3.fromRGB(50, 50, 50),
-    Visible = true
+    Visible = true,
+    AutoButtonColor = false
   })Stroke(MinimizeButton)
 Corner(MinimizeButton, UDim.new(0, 9))
 MakeDrag(MinimizeButton)
@@ -1254,7 +1285,8 @@ function AddDiscordInvite(Parent, Configs)
     TextSize = 12,
     TextScaled = true,
     TextColor3 = Color3.fromRGB(255, 255, 255),
-    BackgroundColor3 = Color3.fromRGB(50, 150, 50)
+    BackgroundColor3 = Color3.fromRGB(50, 150, 50),
+    AutoButtonColor = false
   })Corner(JoinButton, UDim.new(0, 6))
   
   local ClickDelay
