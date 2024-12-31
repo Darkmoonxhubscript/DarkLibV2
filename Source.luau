@@ -937,6 +937,7 @@ function AddDropDown(Parent, Configs)
   })Stroke(Bagulho1, Color3.fromRGB(120, 120, 120), 1)
   
   local ListDrop = Create("ScrollingFrame", DropdownFrame, {
+    Name = "listdrop",
     Size = UDim2.new(1, -4, 1, -35),
     Position = UDim2.new(0, 2, 1, 0),
     AnchorPoint = Vector2.new(0, 1),
@@ -1079,15 +1080,13 @@ end
   ListDrop.CanvasSize = ListDrop.CanvasSize + UDim2.new(0, 0, 0, 10)
   
   function RefreshDropdown(Dropdown, NewOptions)
-    for _, v in pairs(Dropdown:GetChildren()) do
+    for _, v in pairs(Dropdown.listdrop:GetChildren()) do
         if v.Name == "Option" then
             v:Destroy()
         end
     end
     
-    for V in pairs(OpcoesAtuais) do
-      table.remove(OpcoesAtuais, V)
-      end
+    OpcoesAtuais = {}
     ListDrop.CanvasSize = UDim2.new(0, 0, 0, 0)
 
     for i = 1, #NewOptions do
