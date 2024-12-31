@@ -1306,8 +1306,11 @@ function AddDiscordInvite(Parent, Configs)
           TextColor3 = Color3.fromRGB(255, 255, 225)
         })ClickDelay = false
       end)
-  
 end
+
+function Destroy(Object)
+    Object:Destroy()
+    end
 
 function EndLibrary()
   ScreenGui:Destroy()
