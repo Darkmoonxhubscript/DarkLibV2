@@ -1,6 +1,6 @@
 # DarkLib V2
 ## **TIPS**
-- Where it says  'Icon = "Id"' you can put either just the ID or "rbxassetid://id" both ways work.
+- Where it says  'Icon = "Id"' you can put either just the ID or "rbxassetid://id" both ways work. or GetIcon("IconName").
 
 - Where it also says ' Name = "Text" ' you can put ' Text = "Text" ' both ways work.
 
@@ -190,6 +190,18 @@ Default = "1" >> Initial Selected Option (String)
 Callback = function(Value) -- Value = Selected Option Name
 -- Function Here
 end
+
+-- ///////// Functions ///////// --
+
+RefreshDropdown(Dropdown, NewOptions)
+--Dropdown = Dropdown Variable, example: Dropdown1 (no string)
+--New Options = Dropdown New Options (table)
+Example Of Use:
+RefreshDropdown(MyDropdown, {"Op", "Op2"})
+Example With Variable:
+local List = {"Op", "Op2", "Op3"}
+
+RefreshDropdown(MyDropdown, List)
 ]]
 ```
 # EXTRA
