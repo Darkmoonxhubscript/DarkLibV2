@@ -736,27 +736,7 @@ function AddToggle(Parent, Configs)
     local Stroke2 = Stroke(ToggleActive, Color3.fromRGB(160, 160, 160), 2.8)
     Corner(ToggleActive, UDim.new(5, 0))
 
-    local ToggleState = false
-    if Default then
-      SetProps(Stroke1, {
-        Color = Color3.fromRGB(0, 185, 255)
-      })
-    SetProps(Stroke2, {
-        Color = Color3.fromRGB(0, 185, 255)
-      })
-    SetProps(ToggleActive, {
-      BackgroundColor3 = Color3.fromRGB(0, 185, 255),
-    })
-      local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -38, 0, 28)})
-          tween:Play()
-          tween.Completed:Wait()
-        ToggleState = true
-        Callback(ToggleState)
-    end
-
-    
-
-    local TextToggle = Create("TextLabel", ToggleFrame1, {
+local TextToggle = Create("TextLabel", ToggleFrame1, {
         Text = Name,
         TextColor3 = Color3.fromRGB(240, 240, 240),
         Font = Enum.Font.FredokaOne,
@@ -776,6 +756,25 @@ function AddToggle(Parent, Configs)
         Position = UDim2.new(1, -80, 0, 5),
         BackgroundTransparency = 1
     })
+
+
+    local ToggleState = false
+    if Default then
+      SetProps(Stroke1, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+    SetProps(Stroke2, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+    SetProps(ToggleActive, {
+      BackgroundColor3 = Color3.fromRGB(0, 185, 255),
+    })
+      local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -38, 0, 28)})
+          tween:Play()
+          tween.Completed:Wait()
+        ToggleState = true
+        Callback(ToggleState)
+    end
 
     ToggleButtonArea.MouseButton1Click:Connect(function()
         if ToggleState then
