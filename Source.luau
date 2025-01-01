@@ -757,24 +757,7 @@ local TextToggle = Create("TextLabel", ToggleFrame1, {
         BackgroundTransparency = 1
     })
 
-
     local ToggleState = false
-    if Default then
-      SetProps(Stroke1, {
-        Color = Color3.fromRGB(0, 185, 255)
-      })
-    SetProps(Stroke2, {
-        Color = Color3.fromRGB(0, 185, 255)
-      })
-    SetProps(ToggleActive, {
-      BackgroundColor3 = Color3.fromRGB(0, 185, 255),
-    })
-      local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -38, 0, 28)})
-          tween:Play()
-          tween.Completed:Wait()
-        ToggleState = true
-        Callback(ToggleState)
-    end
 
     ToggleButtonArea.MouseButton1Click:Connect(function()
         if ToggleState then
@@ -808,6 +791,23 @@ local TextToggle = Create("TextLabel", ToggleFrame1, {
         end
         Callback(ToggleState)
     end)
+
+if Default then
+      SetProps(Stroke1, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+    SetProps(Stroke2, {
+        Color = Color3.fromRGB(0, 185, 255)
+      })
+    SetProps(ToggleActive, {
+      BackgroundColor3 = Color3.fromRGB(0, 185, 255),
+    })
+      local tween = TweenService:Create(ToggleActive, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Position = UDim2.new(1, -38, 0, 28)})
+          tween:Play()
+          tween.Completed:Wait()
+        ToggleState = true
+        Callback(ToggleState)
+    end
 
     return ToggleFrame1
 end
