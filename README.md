@@ -5,7 +5,6 @@
 - Simple And Fast
 - Easy to Understand
 - Open Source
-- Constant Updates
 - Made in Mobile
 
 ## Made By *DarkMoonHub*
